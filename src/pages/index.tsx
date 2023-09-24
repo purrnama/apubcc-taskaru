@@ -7,7 +7,7 @@ const Home: NextPage = (props) => {
     <div>
       <Head>
         <title>Taskaru</title>
-        <meta name="description" content="This site will fly high 🦤" />
+        <meta name="description" content="" />
       </Head>
       <HomeView />
     </div>
