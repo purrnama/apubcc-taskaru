@@ -4,7 +4,7 @@
 module.exports = {
   mode: "jit",
   purge: ["./src/**/*.{js,jsx,ts,tsx}"],
-  darkMode: "media", // or 'false' or 'class'
+  darkMode: "true", // or 'false' or 'class'
   theme: {
     fontFamily: {
       display: ["Dela Gothic One", "DM Sans"],
@@ -34,7 +34,7 @@ module.exports = {
           primary: "#FF4874",
           secondary: "#EAEAEA",
           accent: "#41BE2D",
-          neutral: "#363232",
+          neutral: "#D9D9D9",
           "base-100": "#221E1E",
           info: "#3abff8",
           success: "#36d399",
@@ -42,7 +42,7 @@ module.exports = {
           error: "#f87272",
         },
       },
-      "dark",
+      //"dark",
       // uncomment to enable
       // "light (default)",
       // "dark",

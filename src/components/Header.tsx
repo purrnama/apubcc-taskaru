@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Header() {
   return (
-    <div className="navbar mb-2">
+    <div className="navbar bg-base-100 mb-2">
       <div className="flex-1 px-2 mx-2 gap-4">
         <Image
           src={"/Taskaru-Icon.png"}
@@ -12,7 +12,7 @@ export default function Header() {
           height={32}
           width={32}
         />
-        <span className="text-xl font-display">TASKARU</span>
+        <p className="text-xl font-display">TASKARU</p>
       </div>
 
       {/* Added Button code here*/}
