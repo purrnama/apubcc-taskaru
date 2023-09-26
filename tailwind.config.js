@@ -7,7 +7,8 @@ module.exports = {
   darkMode: "media", // or 'false' or 'class'
   theme: {
     fontFamily: {
-      // sans: ['Graphik', 'sans-serif'],
+      display: ["Dela Gothic One", "DM Sans"],
+      sans: ["DM Sans", "sans-serif"],
       // serif: ['Merriweather', 'serif'],
     },
     extend: {
@@ -28,6 +29,19 @@ module.exports = {
     styled: true,
     themes: [
       // first one will be the default theme
+      {
+        mytheme: {
+          primary: "#FF4874",
+          secondary: "#EAEAEA",
+          accent: "#41BE2D",
+          neutral: "#363232",
+          "base-100": "#221E1E",
+          info: "#3abff8",
+          success: "#36d399",
+          warning: "#fbbd23",
+          error: "#f87272",
+        },
+      },
       "dark",
       // uncomment to enable
       // "light (default)",
