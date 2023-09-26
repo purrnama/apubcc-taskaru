@@ -6,17 +6,17 @@ export default function TaskCard({
   description?: string;
 }) {
   return (
-    <div className="card w-96 bg-neutral bg-opacity-10 shadow-xl">
+    <div className="card w-96 bg-white bg-opacity-10 shadow-xl">
       <div className="card-body">
         <h2 className="card-title font-display font-normal text-2xl">
           {title}
         </h2>
         <p className="mb-8">{description}</p>
         <div className="flex flex-row">
-          <div className="badge badge-neutral border-0 bg-opacity-10 mr-2 mb-2">
+          <div className="badge badge-neutral border-0 bg-opacity-10 mr-2 mb-2 text-white">
             Rust
           </div>
-          <div className="badge badge-neutral border-0 bg-opacity-10 mr-2 mb-2">
+          <div className="badge badge-neutral border-0 bg-opacity-10 mr-2 mb-2 text-white">
             Typescript
           </div>
         </div>

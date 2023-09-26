@@ -32,8 +32,8 @@ export const HomeView: FC = ({}) => {
           </div>
         </div>
 
-        <h1>Active tasks</h1>
-        <div className="flex flex-row gap-4">
+        <h1 className="text-2xl font-display">Active tasks</h1>
+        <div className="flex flex-row gap-4 my-4">
           <TaskCard
             title="Latte Protocol"
             description="New Component Implementation"
