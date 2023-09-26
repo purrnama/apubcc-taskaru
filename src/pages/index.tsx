@@ -5,8 +5,8 @@ import { HomeView } from "../views";
 const Home: NextPage = (props) => {
   return (
     <div>
-      <Head>
-        <title>Taskaru</title>
+      <Head> 
+        <title>Taskaru Helooo</title>
         <meta name="description" content="" />
       </Head>
       <HomeView />
