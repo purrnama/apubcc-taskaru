@@ -41,87 +41,66 @@ export const TaskPageView: FC = ({}) => {
 
         <div className="card w-300 bg-white bg-opacity-5 shadow-xl">
           <div className="card-body">
-            <div className="card w-80 bg-white bg-opacity-10 bg-base-80 shadow-xl">
-              <div className="card-body">
-                <h2 className="card-title">Card title!</h2>
-                <p>If a dog chews shoes whose shoes does he choose?</p>
-              </div>
-            </div>
-
-            <div className="card w-80 bg-white bg-opacity-10 ">
-              <div className="card-body">
-                <h2 className="card-title">Card title!</h2>
-                <p>If a dog chews shoes whose shoes does he choose?</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-
-
-
-        
-        <div className="flex flex-row gap-4 my-4">
-          <TaskCard
-            title="Latte Protocol"
-            description="New Component Implementation"
-          />
-          <TaskCard title="Matcha Client" description="Fix issues" />
-        </div>
-
-
-
-
-        <h1 className="text-2xl font-display">Active tasks</h1>
-        <div className="flex flex-row gap-4 my-4">
-          <TaskCard
-            title="Latte Protocol"
-            description="New Component Implementation"
-          />
-          <TaskCard title="Matcha Client" description="Fix issues" />
-        </div>
-
-
-        <div className="card w-270 bg-white bg-opacity-5 shadow-xl">
-          <div className="card-body">
-            <div className="flex flex-row gap-5">
-              <div className="card w-120 h-300 bg-white bg-opacity-10 bg-base-80 shadow-xl">
+            <div className="flex flex-row gap-6">
+              <div className="card w-30 mb-5 bg-white bg-opacity-10 ">
                 <div className="card-body">
-                  <h2 className="card-title">Card title!</h2>
-                  <p>If a dog chews shoes whose shoes does he choose?</p>
+                  <h2 className="card-title">Issue Description: </h2>
+                  <h2 className="card-title">Expected Behaviour: </h2>
+                  <h2 className="mr-2 mb-2 card-title">Implementation Details:</h2>
+                  <h2 className="mr-2 mb-2 card-title">Acceptance Criteria:</h2>
+                  <p>- The new component should be fully funrtional and free of any errors or bugs.</p>
                 </div>
               </div>
-
-              <div className="card w-30 bg-white bg-opacity-10 ">
-                <div className="card-body">
-                  <h2 className="card-title">Bounty</h2>
-                  <h2 className="card-title">Paricipants</h2>
-                  <h2 className="mr-2 mb-2 card-title">Submission period</h2>
-                  <p>12 Sep 2030 - 28 Sep 2030</p>
-                  <progress className="progress w-56" value="90" max="150"></progress>
-                  <p>14 days remaining</p>
-                  
-
-                </div>
-              </div>
-            </div>
-
-            <div className="flex flex-col">
-              <div className="card w-30 bg-white bg-opacity-10 ">
-                <div className="card-body">
+              <div className="flex flex-col gap-5">
+                <div className="card w-30 mb-5 bg-white bg-opacity-10 ">
+                  <div className="card-body">
                     <h2 className="card-title">Bounty</h2>
-                    <h2 className="card-title">Paricipants</h2>
+                    <h2 className="card-title mb-8">Paricipants</h2>
                     <h2 className="mr-2 mb-2 card-title">Submission period</h2>
-                    <p>12 Sep 2030 - 28 Sep 2030</p>
-                    <progress className="progress w-56" value="10" max="150"></progress>
+                    <p>12 Sep 2030 - 26 Sep 2030</p>
+                    <progress className="progress w-56" value="75" max="150"></progress>
                     <p>14 days remaining</p>
+                    <div className="card mb-5 w-30 bg-white bg-opacity-10 ">
+                      <div className="flex flex-row">
+                        <div className="card-body">
+                          <p>Participating as</p>
+                          <div className="flex flex-row gap-2 avatar placeholder">
+                            <div className="bg-neutral-focus mt-5 text-neutral-content rounded-full w-12 h-12">
+                              <img
+                                src="https://www.wikihow.com/images/f/ff/Draw-a-Cute-Cartoon-Person-Step-14.jpg"
+                                alt="Avatar"
+                                className="w-12 h-12 rounded-full object-cover"
+                              />
+                            </div>
+                            <h2 className="text-1xl mr-4 mt-5 font-display font-normal text-white">@Dev</h2>
+                            <h3 className="text-gray-200 mt-7 mb-5">0xaddr...xyz</h3>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="card w-120 h-300 bg-white bg-opacity-10 bg-base-80 shadow-xl">
+                  <div className="card-body">
+                    <h2 className="card-title">Task Resources</h2>
+                    <p>If a dog chews shoes whose shoes does he choose?</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        
+
+        <div className="flex flex-row gap-4 my-4">
+          <TaskCard
+            title="Latte Protocol"
+            description="New Component Implementation"
+          />
+          <TaskCard title="Matcha Client" description="Fix issues" />
+        </div>
+
+
+
 
 
 
