@@ -2,10 +2,14 @@ export default function TaskCard({
   title,
   description,
   color,
+  progressValue,
+  remainingDay,
 }: {
   title: string;
   description?: string;
   color: string;
+  progressValue: number;
+  remainingDay: number;
 }) {
 
   const squareStyle = {
@@ -33,7 +37,14 @@ export default function TaskCard({
             Typescript
           </div>
         </div>
-        <progress className="progress w-56" value="10" max="100"></progress>
+        <div>
+        Remaining days: {remainingDay} days
+        </div>
+        <progress
+          className="progress w-56"
+          value={progressValue} 
+          max="100"
+        ></progress>
       </div>
     </div>
   );
