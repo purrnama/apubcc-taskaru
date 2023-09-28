@@ -18,17 +18,11 @@ export const ListTaskView: FC = ({}) => {
         <div className="min-h-12">
           <div className="flex flex-row justify-between">
             <div>
-              <h1 className="text-2xl font-display font-normal text-white mb-12">
+              <h1 className="text-3xl font-display font-normal text-white mb-12">
                 List New Task
               </h1>
             </div>
-            <div className="">
-              <button className="btn btn-outline btn-gray ml-80">
-                View on GitHub
-              </button>
-            </div>
           </div>
-          <p>{publicKey ? <>Your ID: {publicKey.toBase58()}</> : null}</p>
         </div>
       </div>
       <div className="container max-w-2xl mx-auto">

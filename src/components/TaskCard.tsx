@@ -21,7 +21,7 @@ export default function TaskCard({
 
   return (
     <Link href={href || "#"} passHref>
-      <div className="card w-96 bg-white bg-opacity-10 shadow-xl">
+      <div className="card w-[500px] bg-white bg-opacity-10 shadow-xl hover:bg-opacity-20">
         <div className="card-body">
           <div className="flex flex-row">
             <div

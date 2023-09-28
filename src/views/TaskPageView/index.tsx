@@ -2,6 +2,7 @@ import { FC } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import Header from "components/Header";
 import Image from "next/image";
+import TaskHeader from "components/TaskHeader";
 
 export const TaskPageView: FC = ({}) => {
   const { publicKey } = useWallet();
@@ -14,26 +15,9 @@ export const TaskPageView: FC = ({}) => {
     <div className="container mx-auto max-w-6xl p-8 2xl:px-0">
       <div>
         <Header />
-        <div className="pt-2">
-          <div className="hero min-h-16 py-4">
-            <div className="hero-content">
-              <div className="max-w-3xl">
-                <h1 className="mb-13 text-2xl font-display ">
-                  Latte Protocol: New Component Implementation
-                </h1>
-                <div className="flex flex-row gap-8 pt-2 mb-4">
-                  <div className="badge badge-accent"> Active </div>
-                  <p className="gap-2 mb-5"> Task opened 3 days ago </p>
-                  <div className=" mb-2" style={{ marginLeft: "270px" }}>
-                    <button className="btn btn-outline">View on Github</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <TaskHeader />
 
-        <div className="card w-300 bg-white bg-opacity-5 shadow-xl">
+        <div className="card w-300 bg-white bg-opacity-5 shadow-xl relative">
           <div className="card-body">
             <div className="grid grid-cols-5 gap-6">
               <div className="col-span-3 card w-30 mb-5 bg-white bg-opacity-10 ">

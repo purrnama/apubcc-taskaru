@@ -13,14 +13,17 @@ export default function Header() {
             height={32}
             width={32}
           />
-          <p className="text-xl font-display">TASKARU</p>
+          <p className="text-xl font-display">
+            TASKARU <span className="font-sans pl-2">DEMO</span>
+          </p>
         </div>
       </Link>
 
       {/* Added Button code here*/}
       <div className="flex flex-row gap-8">
         <Link href="#">Taskboard</Link>
-        <Link href="#">Task Listing</Link>
+        <Link href="/listtask">Task Listing</Link>
+        <Link href="/reviewsolution">Review Solutions</Link>
         <Link href="/portfolio">Portfolio</Link>
         <WalletMultiButton
           style={{ backgroundColor: "#FF4874" }}
