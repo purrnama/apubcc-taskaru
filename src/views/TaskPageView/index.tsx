@@ -36,8 +36,8 @@ export const TaskPageView: FC = ({}) => {
 
         <div className="card w-300 bg-white bg-opacity-5 shadow-xl">
           <div className="card-body">
-            <div className="flex flex-row gap-6">
-              <div className="card w-30 mb-5 bg-white bg-opacity-10 ">
+            <div className="grid grid-cols-5 gap-6">
+              <div className="col-span-3 card w-30 mb-5 bg-white bg-opacity-10 ">
                 <div className="card-body">
                   <h2 className="card-title">Issue Description: </h2>
                   <p>
@@ -54,7 +54,7 @@ export const TaskPageView: FC = ({}) => {
                   </p>
                 </div>
               </div>
-              <div className="flex flex-col gap-2">
+              <div className="col-span-2 flex flex-col gap-2">
                 <div className="card w-30 mb-5 bg-white bg-opacity-10 ">
                   <div className="card-body">
                     <h2 className="card-title">Bounty</h2>
