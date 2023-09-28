@@ -78,7 +78,12 @@ export const ReviewSolutionView: FC = ({}) => {
                 </div>
               </div>
 
-              <button className="btn btn-neutral">Submit Review</button>
+              <button
+                disabled={!value}
+                className={"btn " + (value ? "btn-success" : "btn-disabled")}
+              >
+                Submit Review
+              </button>
             </div>
           </div>
         </div>
