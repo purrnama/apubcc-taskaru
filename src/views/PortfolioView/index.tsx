@@ -105,6 +105,7 @@ export const PortfolioView: FC = ({}) => {
               color="#FFD874"
               progressValue={30}
               remainingDay={14}
+              href="/taskpage"
             />
           </div>
         </div>
