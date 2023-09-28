@@ -19,7 +19,7 @@ export default function Header() {
       <div className="flex flex-row gap-8">
         <Link href="#">Taskboard</Link>
         <Link href="#">Task Listing</Link>
-        <Link href="#">Portfolio</Link>
+        <Link href="/portfolio">Portfolio</Link>
         <WalletMultiButton
           style={{ backgroundColor: "#FF4874" }}
           className="btn btn-ghost"
