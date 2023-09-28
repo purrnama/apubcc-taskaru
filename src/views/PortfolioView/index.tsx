@@ -12,11 +12,11 @@ export const PortfolioView: FC = ({}) => {
     <div className="container mx-auto max-w-6xl p-8 2xl:px-0">
       <div>
         <Header />
-        <div className="pt-2">
+        <div className="pt-1">
           <div className="hero min-h-16 py-4">
             <div className="hero-content">
               <div className="max-w-3xl">
-                <h1 className="mb-1 text-3xl font-display" style={{textAlign: 'left'}}>
+                <h1 className="text-3xl font-display mt-4"> 
                   Welcome back!
                 </h1>
                 <p>
@@ -30,7 +30,7 @@ export const PortfolioView: FC = ({}) => {
           <div className="card-body h-80 w-80">
             <div className="flex mb-10">
               <div className="flex flex-col gap-8 avatar placeholder">
-                <div className="bg-neutral-focus text-neutral-content rounded-full w-24 h-24">
+                <div className="bg-neutral-focus text-neutral-content rounded-full ring ring-white ring-offset-base-100 -ring-offset-2 w-24 h-24">
                   <img
                     src="https://www.wikihow.com/images/f/ff/Draw-a-Cute-Cartoon-Person-Step-14.jpg"
                     alt="Avatar"
@@ -42,21 +42,21 @@ export const PortfolioView: FC = ({}) => {
               </div>
               <div className="flex flex-row items-center ml-12 -mt-24"> 
               </div>
-                <div className="avatar placeholder ml-4">
-                  <div className="bg-pink-500 text-neutral-content rounded-full w-6 h-6 ml-2">
-                    <span className="text-xs">T</span>
+                <div className="avatar placeholder ml-4"> 
+                  <div className="bg-pink-500 text-neutral-content rounded-full border border-black w-6 h-6 ml-2">
+                    <span className="text-s font-display font-normal text-black">T</span>
                   </div>
                 </div>
                 <div className="ml-4">
-                  <p className="text-gray-400">810</p>
+                  <p className="text-white-400">810</p>
                 </div>
                 <div className="avatar placeholder ml-16">
-                  <div className="bg-pink-500 text-neutral-content rounded-full w-6 h-6 ml-2">
-                    <span className="text-xs">P</span>
+                  <div className="bg-pink-500 text-neutral-content rounded-full border border-black w-6 h-6 ml-2">
+                    <span className="text-s font-display font-normal text-black">P</span>
                   </div>
                 </div>
                 <div className="ml-4">
-                  <p className="text-gray-400">2,600</p>
+                  <p className="text-white-400">2,600</p>
                 </div>
               </div>
               <div className="flex flex-col gap-1 avatar placeholder">
