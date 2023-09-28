@@ -37,8 +37,17 @@ export const HomeView: FC = ({}) => {
           <TaskCard
             title="Latte Protocol"
             description="New Component Implementation"
+            color = "#FFD874"
+            progressValue={15}
+            remainingDay={24}
           />
-          <TaskCard title="Matcha Client" description="Fix issues" />
+          <TaskCard 
+            title="Matcha Client" 
+            description="Fix issues" 
+            color = "#C2FF74" 
+            progressValue={75}
+            remainingDay={5}
+          />
         </div>
       </div>
     </div>
