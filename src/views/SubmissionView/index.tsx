@@ -1,6 +1,5 @@
 import { ChangeEvent, FC, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
-import TaskCard from "components/TaskCard";
 import Header from "components/Header";
 
 export const SubmissionView: FC = ({}) => {

@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
-import TaskCard from "components/TaskCard";
 import Header from "components/Header";
 import Image from "next/image";
 
