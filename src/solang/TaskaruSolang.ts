@@ -7,6 +7,7 @@ import {
   setProvider,
 } from "@coral-xyz/anchor";
 import { u64 } from "@solana/spl-token";
+import { AnchorWallet } from "@solana/wallet-adapter-react";
 import { Connection, PublicKey, Struct } from "@solana/web3.js";
 
 const programID = "7C8HShAB3k6XuZ8Yo7krx4VdmBJXYW1CXecEY2jrfVfP";
@@ -25,7 +26,39 @@ export function useTaskaruProgram(
   const program = new Program(idl, programID);
   return program;
 }
-export async function AcceptTask(wallet: Wallet, connection: Connection) {
+export async function AcceptTask(wallet: AnchorWallet, connection: Connection) {
+  const program = useTaskaruProgram(connection, wallet as Wallet);
+  if (!program) {
+    return;
+  }
+  if (!wallet) {
+    return;
+  }
+  console.log("accepting task");
+  const seed = wallet.publicKey.toBuffer();
+  const [dataAccount] = PublicKey.findProgramAddressSync(
+    [Buffer.from("seed"), seed],
+    program.programId
+  );
+  const tx = await program.methods
+    .setIsAcceptedTask(true)
+    .accounts({ dataAccount: dataAccount })
+    .rpc();
+  const latestBlockHash = await connection.getLatestBlockhash();
+  const confirm = await connection.confirmTransaction(
+    {
+      blockhash: latestBlockHash.blockhash,
+      lastValidBlockHeight: latestBlockHash.lastValidBlockHeight,
+      signature: tx,
+    },
+    "processed"
+  );
+  return confirm;
+}
+export async function ForfeitTask(
+  wallet: AnchorWallet,
+  connection: Connection
+) {
   const program = useTaskaruProgram(connection, wallet as Wallet);
   if (!program) {
     return;
@@ -43,6 +76,16 @@ export async function AcceptTask(wallet: Wallet, connection: Connection) {
     .setIsAcceptedTask(false)
     .accounts({ dataAccount: dataAccount })
     .rpc();
+  const latestBlockHash = await connection.getLatestBlockhash();
+  const confirm = await connection.confirmTransaction(
+    {
+      blockhash: latestBlockHash.blockhash,
+      lastValidBlockHeight: latestBlockHash.lastValidBlockHeight,
+      signature: tx,
+    },
+    "processed"
+  );
+  return confirm;
 }
 
 export async function InitializeAccountData(

@@ -1,19 +1,38 @@
-import { FC, useState } from "react";
-import { useWallet } from "@solana/wallet-adapter-react";
+import { FC, useEffect, useState } from "react";
+import {
+  useAnchorWallet,
+  useConnection,
+  useWallet,
+} from "@solana/wallet-adapter-react";
 import Header from "components/Header";
 import TaskHeader from "components/TaskHeader";
 import TaskPageForm from "components/TaskPageForm";
+import { AcceptTask, ForfeitTask } from "solang/TaskaruSolang";
+import { Wallet } from "@coral-xyz/anchor";
+import { Keypair, PublicKey } from "@solana/web3.js";
 
 export const TaskPageView: FC = ({}) => {
-  const { publicKey } = useWallet();
   const [accepted, setAccepted] = useState(false);
-  const onClick = () => {};
+
+  const wallet = useAnchorWallet();
+  const publicKey = wallet?.publicKey;
+  const { connection } = useConnection();
 
   const onClickAcceptTask = () => {
-    setAccepted(true);
+    if (!wallet) return;
+    AcceptTask(wallet, connection)
+      .then(() => setAccepted(true))
+      .catch((e) => {
+        console.log(e);
+      });
   };
   const onClickForfeitTask = () => {
-    setAccepted(false);
+    if (!wallet) return;
+    ForfeitTask(wallet, connection)
+      .then(() => setAccepted(false))
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   //<p style="text-align: left;">This text is aligned to the left.</p>
