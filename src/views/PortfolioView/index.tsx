@@ -12,13 +12,7 @@ export const PortfolioView: FC = ({}) => {
     <div className="container mx-auto max-w-6xl p-8 2xl:px-0">
       <div>
         <Header />
-        <div className="pt-2">
-          <div className="hero min-h-16 py-4">
-            <div className="hero-content">
-              <div className="max-w-3xl"></div>
-            </div>
-          </div>
-        </div>
+        <div className="h-16"></div>
         <div className="container max-w-5xl mx-auto">
           <h1 className="mb-4 text-4xl font-display">Welcome back!</h1>
           <div className="card h-50 bg-white bg-opacity-10 shadow-xl">
@@ -37,7 +31,7 @@ export const PortfolioView: FC = ({}) => {
                   </h2>
                   <h3 className="text-gray-200">
                     {publicKey ? (
-                      <>Your address: {publicKey.toBase58()}</>
+                      <>{publicKey.toBase58().slice(0, 8) + "..."}</>
                     ) : (
                       "0xaddr...xyz"
                     )}
@@ -102,6 +96,10 @@ export const PortfolioView: FC = ({}) => {
             <TaskCard
               title="Latte Protocol"
               description="New Component Implementation"
+              color="#FFD874"
+              progressValue={30}
+              remainingDay={14}
+              href="/taskpage"
             />
           </div>
         </div>
