@@ -73,7 +73,7 @@ export const TaskPageView: FC = ({}) => {
                       </h3>
                     </div>
                     <div className="flex flex-row gap-6">
-                      <h2 className="card-title mb-8">Paricipants</h2>
+                      <h2 className="card-title mb-8">Participants</h2>
                       <h2 className="text-xl-1 ml-24 font-display font-normal text-white">
                         8
                       </h2>
