@@ -1,13 +1,20 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import Header from "components/Header";
-import Image from "next/image";
 import TaskHeader from "components/TaskHeader";
+import TaskPageForm from "components/TaskPageForm";
 
 export const TaskPageView: FC = ({}) => {
   const { publicKey } = useWallet();
-
+  const [accepted, setAccepted] = useState(false);
   const onClick = () => {};
+
+  const onClickAcceptTask = () => {
+    setAccepted(true);
+  };
+  const onClickForfeitTask = () => {
+    setAccepted(false);
+  };
 
   //<p style="text-align: left;">This text is aligned to the left.</p>
 
@@ -81,71 +88,12 @@ export const TaskPageView: FC = ({}) => {
                 </div>
               </div>
               <div className="col-span-2 flex flex-col gap-2">
-                <div className="card mb-2 bg-white bg-opacity-10 ">
-                  <div className="card-body ">
-                    <div className="flex flex-row gap-6">
-                      <h2 className="card-title">Bounty</h2>
-                      <h3 className="text-xl-1 ml-20 font-display font-normal text-white">
-                        700 USDC
-                      </h3>
-                    </div>
-                    <div className="flex flex-row gap-6">
-                      <h2 className="card-title mb-8">Paricipants</h2>
-                      <h2 className="text-xl-1 ml-24 font-display font-normal text-white">
-                        8
-                      </h2>
-                    </div>
-                    <h2 className="mr-2 mb-2 card-title">Submission period</h2>
-                    <p>12 Sep 2030 - 26 Sep 2030</p>
-                    <progress
-                      className="progress w-56"
-                      value="75"
-                      max="150"
-                    ></progress>
-                    <p className="mb-4">14 days remaining</p>
-                    {publicKey && (
-                      <div className="card mb-5 h-40 w-30 bg-white bg-opacity-10 ">
-                        <div className="flex flex-row">
-                          <div className="card-body">
-                            <p>Participating as</p>
-                            <div className="flex flex-row items-center gap-2 avatar placeholder">
-                              <div className="bg-neutral-focus mt-5 text-neutral-content rounded-full">
-                                <Image
-                                  src={"/default-avatar.png"}
-                                  alt="Avatar"
-                                  width={60}
-                                  height={60}
-                                  className="rounded-full"
-                                />
-                              </div>
-                              <h2 className="text-xl font-display font-normal text-white">
-                                @Dev
-                              </h2>
-                              <h3 className="text-gray-200">
-                                {publicKey ? (
-                                  <>
-                                    Your address:{" "}
-                                    {publicKey.toBase58().slice(0, 8) + "..."}
-                                  </>
-                                ) : (
-                                  "0xaddr...xyz"
-                                )}
-                              </h3>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-
-                    <button
-                      className={
-                        "btn " + (publicKey ? "btn-success" : "btn-disabled")
-                      }
-                    >
-                      {publicKey ? "Accept Task" : "Connect Wallet"}
-                    </button>
-                  </div>
-                </div>
+                <TaskPageForm
+                  publicKey={publicKey?.toBase58()}
+                  accepted={accepted}
+                  onClickAcceptTask={onClickAcceptTask}
+                  onClickForfeitTask={onClickForfeitTask}
+                />
                 <div className="card w-120 bg-white bg-opacity-10 bg-base-80 shadow-xl">
                   <div className="card-body">
                     <h2 className="card-title">Task Resources</h2>
