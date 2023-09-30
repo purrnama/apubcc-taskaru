@@ -77,6 +77,30 @@ export type TaskaruSolang = {
       ]
     },
     {
+      "name": "submitSolution",
+      "accounts": [
+        {
+          "name": "dataAccount",
+          "isMut": true,
+          "isSigner": false,
+          "isOptional": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "resetAll",
+      "accounts": [
+        {
+          "name": "dataAccount",
+          "isMut": true,
+          "isSigner": false,
+          "isOptional": false
+        }
+      ],
+      "args": []
+    },
+    {
       "name": "getTasksCompleted",
       "accounts": [
         {
@@ -101,9 +125,53 @@ export type TaskaruSolang = {
       ],
       "args": [],
       "returns": "bool"
+    },
+    {
+      "name": "getIsSubmittedSolution",
+      "accounts": [
+        {
+          "name": "dataAccount",
+          "isMut": false,
+          "isSigner": false,
+          "isOptional": false
+        }
+      ],
+      "args": [],
+      "returns": "bool"
+    },
+    {
+      "name": "getTaskStatus",
+      "accounts": [
+        {
+          "name": "dataAccount",
+          "isMut": false,
+          "isSigner": false,
+          "isOptional": false
+        }
+      ],
+      "args": [],
+      "returns": {
+        "defined": "TaskStatus"
+      }
     }
   ],
   "types": [
+    {
+      "name": "TaskStatus",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "isAcceptedTask",
+            "type": "bool"
+          },
+          {
+            "name": "isSubmittedSolution",
+            "type": "bool"
+          }
+        ]
+      }
+    },
     {
       "name": "accountData_returns",
       "docs": [
@@ -125,6 +193,10 @@ export type TaskaruSolang = {
             "type": "bool"
           },
           {
+            "name": "isSubmittedSolution",
+            "type": "bool"
+          },
+          {
             "name": "bump",
             "type": {
               "array": [
@@ -138,7 +210,7 @@ export type TaskaruSolang = {
     }
   ],
   "metadata": {
-    "address": "7C8HShAB3k6XuZ8Yo7krx4VdmBJXYW1CXecEY2jrfVfP"
+    "address": "8cTeqUjgcLhLhD6nzVoioJ8sbDnitsz86TtFSNjyrVnr"
   }
 };
 
@@ -221,6 +293,30 @@ export const IDL: TaskaruSolang = {
       ]
     },
     {
+      "name": "submitSolution",
+      "accounts": [
+        {
+          "name": "dataAccount",
+          "isMut": true,
+          "isSigner": false,
+          "isOptional": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "resetAll",
+      "accounts": [
+        {
+          "name": "dataAccount",
+          "isMut": true,
+          "isSigner": false,
+          "isOptional": false
+        }
+      ],
+      "args": []
+    },
+    {
       "name": "getTasksCompleted",
       "accounts": [
         {
@@ -245,9 +341,53 @@ export const IDL: TaskaruSolang = {
       ],
       "args": [],
       "returns": "bool"
+    },
+    {
+      "name": "getIsSubmittedSolution",
+      "accounts": [
+        {
+          "name": "dataAccount",
+          "isMut": false,
+          "isSigner": false,
+          "isOptional": false
+        }
+      ],
+      "args": [],
+      "returns": "bool"
+    },
+    {
+      "name": "getTaskStatus",
+      "accounts": [
+        {
+          "name": "dataAccount",
+          "isMut": false,
+          "isSigner": false,
+          "isOptional": false
+        }
+      ],
+      "args": [],
+      "returns": {
+        "defined": "TaskStatus"
+      }
     }
   ],
   "types": [
+    {
+      "name": "TaskStatus",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "isAcceptedTask",
+            "type": "bool"
+          },
+          {
+            "name": "isSubmittedSolution",
+            "type": "bool"
+          }
+        ]
+      }
+    },
     {
       "name": "accountData_returns",
       "docs": [
@@ -269,6 +409,10 @@ export const IDL: TaskaruSolang = {
             "type": "bool"
           },
           {
+            "name": "isSubmittedSolution",
+            "type": "bool"
+          },
+          {
             "name": "bump",
             "type": {
               "array": [
@@ -282,6 +426,6 @@ export const IDL: TaskaruSolang = {
     }
   ],
   "metadata": {
-    "address": "7C8HShAB3k6XuZ8Yo7krx4VdmBJXYW1CXecEY2jrfVfP"
+    "address": "8cTeqUjgcLhLhD6nzVoioJ8sbDnitsz86TtFSNjyrVnr"
   }
 };

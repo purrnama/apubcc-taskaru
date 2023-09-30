@@ -25,7 +25,7 @@ export const fetchAndParseData = async (
     console.log("fetching account data");
     let { data } = (await connection.getAccountInfo(wallet)) || {};
     if (!data) return;
-    console.log(data);
+    return data;
   } catch (e) {
     console.log(e);
   }

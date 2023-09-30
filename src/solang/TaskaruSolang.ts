@@ -1,21 +1,21 @@
-import { IDL, TaskaruSolang } from "./types/taskaru_solang";
+import { IDL } from "./types/taskaru_solang";
 import {
-  Address,
   AnchorProvider,
   Program,
   Wallet,
   setProvider,
 } from "@coral-xyz/anchor";
-import { u64 } from "@solana/spl-token";
 import { AnchorWallet } from "@solana/wallet-adapter-react";
-import { Connection, PublicKey, Struct } from "@solana/web3.js";
+import { Connection, PublicKey } from "@solana/web3.js";
 
-const programID = "7C8HShAB3k6XuZ8Yo7krx4VdmBJXYW1CXecEY2jrfVfP";
+const programID = "8cTeqUjgcLhLhD6nzVoioJ8sbDnitsz86TtFSNjyrVnr";
 
-export function useTaskaruProgram(
-  connection: Connection,
-  wallet: Wallet | null
-) {
+export interface TaskStatus {
+  isAcceptedTask: boolean;
+  isSubmittedSolution: boolean;
+}
+
+function useTaskaruProgram(connection: Connection, wallet: Wallet | null) {
   const idl = IDL;
   if (!wallet) {
     console.error("TaskaruSolang: Wallet not connected.");
@@ -26,6 +26,7 @@ export function useTaskaruProgram(
   const program = new Program(idl, programID);
   return program;
 }
+
 export async function AcceptTask(wallet: AnchorWallet, connection: Connection) {
   const program = useTaskaruProgram(connection, wallet as Wallet);
   if (!program) {
@@ -89,7 +90,7 @@ export async function ForfeitTask(
 }
 
 export async function InitializeAccountData(
-  wallet: Wallet,
+  wallet: AnchorWallet,
   connection: Connection
 ) {
   const program = useTaskaruProgram(connection, wallet as Wallet);
@@ -109,9 +110,19 @@ export async function InitializeAccountData(
     .new(seed, [bump], dataAccount)
     .accounts({ dataAccount: dataAccount })
     .rpc();
+  const latestBlockHash = await connection.getLatestBlockhash();
+  const confirm = await connection.confirmTransaction(
+    {
+      blockhash: latestBlockHash.blockhash,
+      lastValidBlockHeight: latestBlockHash.lastValidBlockHeight,
+      signature: tx,
+    },
+    "processed"
+  );
+  return confirm;
 }
-export async function getIsAcceptedTask(
-  wallet: Wallet,
+export async function GetTaskStatus(
+  wallet: AnchorWallet,
   connection: Connection
 ) {
   const program = useTaskaruProgram(connection, wallet as Wallet);
@@ -121,17 +132,17 @@ export async function getIsAcceptedTask(
   if (!wallet) {
     return;
   }
-  console.log("get isAcceptedTask");
+  console.log("getTaskStatus");
   const seed = wallet.publicKey.toBuffer();
   const [dataAccount] = PublicKey.findProgramAddressSync(
     [Buffer.from("seed"), seed],
     program.programId
   );
-  const isAcceptedTask = await program.methods
-    .getIsAcceptedTask()
+  const taskStatus: TaskStatus = await program.methods
+    .getTaskStatus()
     .accounts({ dataAccount: dataAccount })
     .view();
-  console.log(isAcceptedTask);
+  return taskStatus;
 }
 
 export async function fetchAccountInfo(wallet: Wallet, connection: Connection) {
@@ -140,4 +151,71 @@ export async function fetchAccountInfo(wallet: Wallet, connection: Connection) {
   const { data } = (await connection.getAccountInfo(wallet.publicKey)) || {};
   if (!data) return;
   console.log(data);
+}
+
+export async function SubmitSolution(
+  wallet: AnchorWallet,
+  connection: Connection
+) {
+  const program = useTaskaruProgram(connection, wallet as Wallet);
+  if (!program) {
+    return;
+  }
+  if (!wallet) {
+    return;
+  }
+  console.log("submittting solution");
+  if (!wallet) return;
+  const seed = wallet.publicKey.toBuffer();
+  const [dataAccount] = PublicKey.findProgramAddressSync(
+    [Buffer.from("seed"), seed],
+    program.programId
+  );
+  const tx = await program.methods
+    .submitSolution()
+    .accounts({ dataAccount: dataAccount })
+    .rpc();
+  const latestBlockHash = await connection.getLatestBlockhash();
+  const confirm = await connection.confirmTransaction(
+    {
+      blockhash: latestBlockHash.blockhash,
+      lastValidBlockHeight: latestBlockHash.lastValidBlockHeight,
+      signature: tx,
+    },
+    "processed"
+  );
+  return confirm;
+}
+export async function ResetAllData(
+  wallet: AnchorWallet,
+  connection: Connection
+) {
+  const program = useTaskaruProgram(connection, wallet as Wallet);
+  if (!program) {
+    return;
+  }
+  if (!wallet) {
+    return;
+  }
+  console.log("submittting solution");
+  if (!wallet) return;
+  const seed = wallet.publicKey.toBuffer();
+  const [dataAccount] = PublicKey.findProgramAddressSync(
+    [Buffer.from("seed"), seed],
+    program.programId
+  );
+  const tx = await program.methods
+    .resetAll()
+    .accounts({ dataAccount: dataAccount })
+    .rpc();
+  const latestBlockHash = await connection.getLatestBlockhash();
+  const confirm = await connection.confirmTransaction(
+    {
+      blockhash: latestBlockHash.blockhash,
+      lastValidBlockHeight: latestBlockHash.lastValidBlockHeight,
+      signature: tx,
+    },
+    "processed"
+  );
+  return confirm;
 }

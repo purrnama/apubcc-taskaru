@@ -1,18 +1,18 @@
 import { FC, useEffect, useState } from "react";
-import {
-  useAnchorWallet,
-  useConnection,
-  useWallet,
-} from "@solana/wallet-adapter-react";
+import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
 import Header from "components/Header";
 import TaskHeader from "components/TaskHeader";
 import TaskPageForm from "components/TaskPageForm";
-import { AcceptTask, ForfeitTask } from "solang/TaskaruSolang";
-import { Wallet } from "@coral-xyz/anchor";
-import { Keypair, PublicKey } from "@solana/web3.js";
+import { AcceptTask, ForfeitTask, GetTaskStatus } from "solang/TaskaruSolang";
+import { useRouter } from "next/router";
+import { Dialog } from "@headlessui/react";
 
 export const TaskPageView: FC = ({}) => {
+  const router = useRouter();
   const [accepted, setAccepted] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [isShowFetchingModal, setIsShowFetchingModal] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   const wallet = useAnchorWallet();
   const publicKey = wallet?.publicKey;
@@ -35,7 +35,34 @@ export const TaskPageView: FC = ({}) => {
       });
   };
 
-  //<p style="text-align: left;">This text is aligned to the left.</p>
+  const onClickSubmitTask = () => {
+    router.push("/submission");
+  };
+
+  const checkTaskStatus = () => {
+    if (!wallet) return;
+    if (isInitialized) return;
+    setIsShowFetchingModal(true);
+    GetTaskStatus(wallet, connection)
+      .then((result) => {
+        if (!result) return;
+        setAccepted(result.isAcceptedTask);
+        setSubmitted(result.isSubmittedSolution);
+        setIsInitialized(true);
+      })
+      .catch((e) => {
+        console.log(e);
+      })
+      .finally(() => {
+        setIsShowFetchingModal(false);
+      });
+  };
+
+  useEffect(() => {
+    if (wallet?.publicKey) {
+      checkTaskStatus();
+    }
+  }, [wallet]);
 
   return (
     <div className="container mx-auto max-w-6xl p-8 2xl:px-0">
@@ -110,6 +137,9 @@ export const TaskPageView: FC = ({}) => {
                 <TaskPageForm
                   publicKey={publicKey?.toBase58()}
                   accepted={accepted}
+                  submitted={submitted}
+                  initialized={isInitialized}
+                  onClickSubmitTask={onClickSubmitTask}
                   onClickAcceptTask={onClickAcceptTask}
                   onClickForfeitTask={onClickForfeitTask}
                 />
@@ -133,6 +163,35 @@ export const TaskPageView: FC = ({}) => {
           </div>
         </div>
       </div>
+
+      <Dialog
+        as="div"
+        className={"relative z-10"}
+        open={isShowFetchingModal}
+        onClose={() => setIsShowFetchingModal(false)}
+      >
+        <div className="fixed inset-0 bg-black bg-opacity-20" />
+        <div className="fixed inset-0 overflow-y-auto">
+          <div className="flex min-h-full items-center justify-center p-4 text-center">
+            <Dialog.Panel
+              className={
+                "w-full max-w-xl overflow-hidden rounded-lg bg-neutral-800 px-8 py-6 text-left align-middle shadow-xl"
+              }
+            >
+              <div className="flex flex-col gap-4 mb-8">
+                <Dialog.Title className={"font-display text-3xl"}>
+                  Fetching data
+                </Dialog.Title>
+
+                <p className="text-lg font-sans">
+                  Sign the transaction to fetch accept status from your account
+                  data.
+                </p>
+              </div>
+            </Dialog.Panel>
+          </div>
+        </div>
+      </Dialog>
     </div>
   );
 };

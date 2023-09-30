@@ -1,14 +1,38 @@
 import { ChangeEvent, FC, useState } from "react";
-import { useWallet } from "@solana/wallet-adapter-react";
+import {
+  useAnchorWallet,
+  useConnection,
+  useWallet,
+} from "@solana/wallet-adapter-react";
 import Header from "components/Header";
 import TaskHeader from "components/TaskHeader";
+import { SubmitSolution } from "solang/TaskaruSolang";
+import { Dialog } from "@headlessui/react";
+import { useRouter } from "next/router";
 
 export const SubmissionView: FC = ({}) => {
-  const { publicKey } = useWallet();
+  const router = useRouter();
+  const wallet = useAnchorWallet();
+  const { connection } = useConnection();
   const [value, setValue] = useState("");
+  const [isShowThankYouModal, setIsShowThankYouModal] = useState(false);
 
   const onChangeValue = (event: ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
+  };
+
+  const onClickSubmitSolution = () => {
+    if (!wallet) return;
+    SubmitSolution(wallet, connection)
+      .then(() => {
+        setIsShowThankYouModal(true);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
+  const onClickReturn = () => {
+    router.push("/taskpage");
   };
 
   return (
@@ -36,6 +60,7 @@ export const SubmissionView: FC = ({}) => {
                 />
               </div>
               <button
+                onClick={onClickSubmitSolution}
                 disabled={!Boolean(value)}
                 className={
                   "btn btn-block " +
@@ -48,6 +73,38 @@ export const SubmissionView: FC = ({}) => {
           </div>
         </div>
       </div>
+
+      <Dialog
+        as="div"
+        className={"relative z-10"}
+        open={isShowThankYouModal}
+        onClose={() => setIsShowThankYouModal(false)}
+      >
+        <div className="fixed inset-0 bg-black bg-opacity-20" />
+        <div className="fixed inset-0 overflow-y-auto">
+          <div className="flex min-h-full items-center justify-center p-4 text-center">
+            <Dialog.Panel
+              className={
+                "w-full max-w-xl overflow-hidden rounded-lg bg-neutral-800 px-8 py-6 text-left align-middle shadow-xl"
+              }
+            >
+              <div className="flex flex-col gap-4 mb-8">
+                <Dialog.Title className={"font-display text-3xl"}>
+                  Thank you!
+                </Dialog.Title>
+
+                <p className="text-lg font-sans">
+                  Your solution has been submitted. Thank you for contributing!
+                </p>
+              </div>
+
+              <button className="btn btn-primary" onClick={onClickReturn}>
+                Return
+              </button>
+            </Dialog.Panel>
+          </div>
+        </div>
+      </Dialog>
     </div>
   );
 };
