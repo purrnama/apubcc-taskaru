@@ -1,12 +1,30 @@
-import { FC } from "react";
-import { useWallet } from "@solana/wallet-adapter-react";
+import { FC, useState } from "react";
+import {
+  useAnchorWallet,
+  useConnection,
+  useWallet,
+} from "@solana/wallet-adapter-react";
 import TaskCard from "components/TaskCard";
 import Header from "components/Header";
 import Image from "next/image";
+import { ResetAllData } from "solang/TaskaruSolang";
+import { Dialog } from "@headlessui/react";
 
 export const PortfolioView: FC = ({}) => {
   const { publicKey } = useWallet();
-  const onClick = () => {};
+
+  const wallet = useAnchorWallet();
+  const { connection } = useConnection();
+
+  const [isShowResetModal, setIsShowResetModal] = useState(false);
+
+  const onClickResetAll = () => {
+    if (!wallet) return;
+    setIsShowResetModal(true);
+    ResetAllData(wallet, connection).then(() => {
+      setIsShowResetModal(false);
+    });
+  };
 
   return (
     <div className="container mx-auto max-w-6xl p-8 2xl:px-0">
@@ -104,6 +122,38 @@ export const PortfolioView: FC = ({}) => {
           </div>
         </div>
       </div>
+      <button onClick={onClickResetAll} className="btn btn-error">
+        Reset all data
+      </button>
+
+      <Dialog
+        as="div"
+        className={"relative z-10"}
+        open={isShowResetModal}
+        onClose={() => setIsShowResetModal(false)}
+      >
+        <div className="fixed inset-0 bg-black bg-opacity-20" />
+        <div className="fixed inset-0 overflow-y-auto">
+          <div className="flex min-h-full items-center justify-center p-4 text-center">
+            <Dialog.Panel
+              className={
+                "w-full max-w-xl overflow-hidden rounded-lg bg-neutral-800 px-8 py-6 text-left align-middle shadow-xl"
+              }
+            >
+              <div className="flex flex-col gap-4 mb-8">
+                <Dialog.Title className={"font-display text-3xl"}>
+                  Reset data
+                </Dialog.Title>
+
+                <p className="text-lg font-sans">
+                  This will reset all the data in your account. For debugging
+                  purposes only.
+                </p>
+              </div>
+            </Dialog.Panel>
+          </div>
+        </div>
+      </Dialog>
     </div>
   );
 };

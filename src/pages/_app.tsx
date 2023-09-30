@@ -8,8 +8,7 @@ import "../styles/globals.css";
 // set custom RPC server endpoint for the final website
 // const endpoint = "https://explorer-api.devnet.solana.com";
 // const endpoint = "http://127.0.0.1:8899";
-const endpoint =
-  "https://solana-devnet.g.alchemy.com/v2/8c9kqFdLR1ouC7OIlBjb0wyS_Z_rOl8w";
+const endpoint = "https://api.devnet.solana.com";
 
 const WalletProvider = dynamic(
   () => import("../contexts/ClientWalletProvider"),

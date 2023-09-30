@@ -3,12 +3,16 @@ import Image from "next/image";
 export default function TaskPageForm({
   publicKey,
   accepted,
+  submitted,
+  initialized,
   onClickAcceptTask,
   onClickForfeitTask,
   onClickSubmitTask,
 }: {
   publicKey?: string;
   accepted: boolean;
+  submitted: boolean;
+  initialized: boolean;
   onClickAcceptTask?: () => void;
   onClickForfeitTask?: () => void;
   onClickSubmitTask?: () => void;
@@ -67,34 +71,50 @@ export default function TaskPageForm({
           </div>
         )}
 
-        {Boolean(!publicKey || !accepted) && (
+        {publicKey && !accepted && (
           <button
             onClick={onClickAcceptTask}
-            className={"btn " + (publicKey ? "btn-primary" : "btn-disabled")}
+            className={
+              "btn " +
+              (publicKey && initialized ? "btn-primary" : "btn-disabled")
+            }
           >
-            {publicKey ? "Accept Task" : "Connect Wallet"}
+            {initialized
+              ? publicKey
+                ? "Accept Task"
+                : "Connect Wallet"
+              : "Initializing.."}
           </button>
         )}
-        {publicKey && accepted && (
-          <>
-            <h2 className="card-title  ml-12">Time to left to submit</h2>
-            <h2 className="text-3xl ml-20 mb-8  font-normal text-white">
-              14d:10h:12m
-            </h2>
-            <button
-              onClick={onClickSubmitTask}
-              className={"btn " + (publicKey ? "btn-success" : "btn-disabled")}
-            >
-              Submit Solution
-            </button>
-            <button
-              onClick={onClickForfeitTask}
-              className={"btn " + (publicKey ? "btn-error" : "btn-disabled")}
-            >
-              Forfeit Task
-            </button>
-          </>
-        )}
+        {publicKey &&
+          accepted &&
+          initialized &&
+          (!submitted ? (
+            <>
+              <h2 className="card-title  ml-12">Time to left to submit</h2>
+              <h2 className="text-3xl ml-20 mb-8  font-normal text-white">
+                14d:10h:12m
+              </h2>
+              <button
+                onClick={onClickSubmitTask}
+                className={
+                  "btn " + (publicKey ? "btn-success" : "btn-disabled")
+                }
+              >
+                Submit Solution
+              </button>
+              <button
+                onClick={onClickForfeitTask}
+                className={"btn " + (publicKey ? "btn-error" : "btn-disabled")}
+              >
+                Forfeit Task
+              </button>
+            </>
+          ) : (
+            <>
+              <h2 className="card-title  ml-12">Solution already submitted!</h2>
+            </>
+          ))}
       </div>
     </div>
   );
