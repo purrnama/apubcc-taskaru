@@ -9,6 +9,7 @@ Demo prototype for APUBCC Sparkathon
 Taskaru is a platform for freelance developers to work on coding tasks in a novel hackathon-style approach to development. Job listers can create tasks by putting bounties on issues and projects, and developers will participate in providing solutions to the task. Solutions are filtered through a community review process and the bounty will be distributed proportional to the quality of solutions. Past experiences and reputation on the platform is recorded on-chain and presented in a portfolio for further connections and job opportunities.
 
 Solana Program ID (devnet): 8cTeqUjgcLhLhD6nzVoioJ8sbDnitsz86TtFSNjyrVnr ([View on Solana Explorer](https://explorer.solana.com/address/8cTeqUjgcLhLhD6nzVoioJ8sbDnitsz86TtFSNjyrVnr?cluster=devnet))
+
 Smart Contract source code: [https://github.com/purrnama/apubcc-taskaru-anchor](https://github.com/purrnama/apubcc-taskaru-anchor)
 
 
