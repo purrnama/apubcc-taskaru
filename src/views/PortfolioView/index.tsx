@@ -56,28 +56,6 @@ export const PortfolioView: FC = ({}) => {
                   </h3>
                 </div>
                 <div className="col-span-2 flex flex-col gap-8">
-                  <div className="flex flex-row gap-4">
-                    <div className="flex flex-row items-center">
-                      <div className="avatar placeholder">
-                        <div className="bg-pink-500 text-neutral-content rounded-full w-8 h-8 ml-2">
-                          <span className="text-xs font-display">T</span>
-                        </div>
-                      </div>
-                      <div className="ml-4">
-                        <p className="text-gray-400 text-xl">810</p>
-                      </div>
-                    </div>
-                    <div className="flex flex-row items-center">
-                      <div className="avatar placeholder">
-                        <div className="bg-pink-500 text-neutral-content rounded-full w-8 h-8 ml-2">
-                          <span className="text-xs font-display">R</span>
-                        </div>
-                      </div>
-                      <div className="ml-4">
-                        <p className="text-gray-400 text-xl">2600</p>
-                      </div>
-                    </div>
-                  </div>
                   <div className="grid grid-cols-3 gap-4">
                     <div className="flex flex-col gap-2">
                       <h3 className="text-xl font-display font-normal text-white">

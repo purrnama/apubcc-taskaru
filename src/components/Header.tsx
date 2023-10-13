@@ -21,7 +21,7 @@ export default function Header() {
 
       {/* Added Button code here*/}
       <div className="flex flex-row gap-8">
-        <Link href="#">Taskboard</Link>
+        <Link href="/">Taskboard</Link>
         <Link href="/listtask">Task Listing</Link>
         <Link href="/reviewsolution">Review Solutions</Link>
         <Link href="/portfolio">Portfolio</Link>
